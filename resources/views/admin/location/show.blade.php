@@ -7,8 +7,31 @@
             </li>
 
             <li class="list-group-item">
+                <b class="text-uppercase">Feature image:</b>
+                <div class="img-container">
+                    <x-form.table_image url="{{ $location->feature_image->getPath() }}" height="100px" width="200px" />
+                </div>
+            </li>
+
+            <li class="list-group-item">
+                <span>
+                    <b class="text-uppercase">Cover image:</b>
+                    <div class="img-container">
+                        <x-form.table_image url="{{ $location->cover_image->getPath() }}" height="100px"
+                            width="200px" />
+                    </div>
+                </span>
+            </li>
+
+            <li class="list-group-item">
                 <b class="text-uppercase">Address:</b>
                 <span>{{ $location->address }}</span>
+            </li>
+
+
+            <li class="list-group-item">
+                <b class="text-uppercase">Carousel Text:</b>
+                <span>{{ $location->carousel_text }}</span>
             </li>
 
             {{-- Phase Case --}}
@@ -49,7 +72,7 @@
                         @default
                             bg-label-secondary
                     @endswitch">
-                    
+
                     @switch($location->status)
                         @case(0)
                             Inactive

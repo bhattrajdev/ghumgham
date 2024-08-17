@@ -23,6 +23,21 @@
                         </div>
                     </x-form.row>
 
+
+
+                    <x-form.row>
+                        <div class="col-md-6">
+                            <x-form.input type="file" label="Image" :req="true" id="image" name="image"
+                                accept="image/*" onchange="previewThumb(this,'featured-thumb')" />
+                            <x-form.preview id="featured-thumb" />
+                        </div>
+                        <div class="col-md-6">
+                            <x-form.input type="file" label="Cover" id="cover" :req="true" name="cover"
+                                accept="image/*" onchange="previewThumb(this,'cover-thumb')" />
+                            <x-form.preview id="cover-thumb" />
+                        </div>
+                    </x-form.row>
+
                     <div class="col-md-6">
                         <x-form.select label="Phase" :req="true" :options="\App\Enums\PhaseType::getPhaseList()" name="phase"
                             value="{{ old('phase') }}"></x-form.select>

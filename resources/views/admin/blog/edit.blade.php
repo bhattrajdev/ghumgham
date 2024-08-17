@@ -23,18 +23,29 @@
                                 </x-form.row>
 
                                 <x-form.row>
+                                    <div class="col-lg-6">
+                                        <x-form.input type="file" label="Image" :req="true" id="image" name="image" accept="image/*" onchange="previewThumb(this,'blog-thumb')" />
+                                        <x-form.preview id="blog-thumb" url="{{ $blog->feature_image->getPath() }}" />
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <x-form.input type="file" label="Cover" :req="true" id="cover" name="cover" accept="image/*" onchange="previewThumb(this,'cover-thumb')" />
+                                        <x-form.preview id="cover-thumb" url="{{ $blog->cover_image->getPath() }}" />
+                                    </div>
+                                </x-form.row>
+
+                                <x-form.row>
                                     <x-form.input type="date" col="6" label="Publish Date" :req="true"
                                         id="publish_date" name="publish_date" value="{{ $blog->publish_date }}" />
 
-                                        <div class="col-md-6">
-                                            <x-form.select label="Phase" :req="true" :options="\App\Enums\PhaseType::getPhaseList()" name="phase"
-                                                value="{{ old('phase', $blog->phase) }}"></x-form.select>
-                                        </div>
-                                <br />
+                                    <div class="col-md-6">
+                                        <x-form.select label="Phase" :req="true" :options="\App\Enums\PhaseType::getPhaseList()" name="phase"
+                                            value="{{ old('phase', $blog->phase) }}"></x-form.select>
+                                    </div>
+                                    <br />
 
                                 </x-form.row>
 
-                                
+
                                 <br />
 
                                 <x-form.textarea label="Description" isEditor="true" :req="true" id="description"
@@ -46,7 +57,7 @@
 
 
                                 <x-form.checkbox label="Status" id="status" name="status" value="1"
-                                    class="form-check-input" :isChecked="$blog->status ? 'checked' : '' " />
+                                    class="form-check-input" :isChecked="$blog->status ? 'checked' : ''" />
 
                                 <x-form.button class="btn btn-sm btn-dark" type="submit">
                                     <i class='bx bx-save bx-xs'></i> Save

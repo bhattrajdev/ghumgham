@@ -14,7 +14,6 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->use([
             // 'auth.user' => \App\Http\Middleware\UserAuth::class,
             // 'auth.admin' => \App\Http\Middleware\AdminAuth::class,
-            // 'redirect_if_authenticated' => \App\Http\Middleware\Admin\AdminRedirectToLogin::class,
 
         ]);
     })

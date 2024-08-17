@@ -16,7 +16,7 @@
 
                 <div class="table-responsive no-wrap">
                     <table class="table" id="datatable">
-                        <x-table.header :headers="['title', 'publish date', 'phase', 'Actions']" />
+                        <x-table.header :headers="['image','title', 'publish date', 'phase', 'Actions']" />
                         <tbody id="tablecontents"></tbody>
                     </table>
                 </div>

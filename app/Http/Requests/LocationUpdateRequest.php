@@ -33,6 +33,7 @@ class LocationUpdateRequest extends FormRequest
             'description' => 'required|string|min:3',
             'route' => 'required|string|min:3',
             'address' => 'required|string',
+            'carousel_text' => 'required|string',
             'user_id' => 'nullable',
             'latitude' => 'required|string',
             'longitude' => 'required|string',

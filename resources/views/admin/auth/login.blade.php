@@ -13,7 +13,7 @@
                 </a>
             </div>
             <h4 class="mb-3">Administrative Login</h4>
-            <form id="formAuthentication" class="mb-3" action="{{ route('admin.login') }}" method="POST">
+            <form id="formAuthentication" class="mb-3" action="{{ route('admin.storeLogin') }}" method="POST">
                 @csrf
                 <div class="mb-3">
                     <label for="email" class="form-label">Sign in with your email</label>

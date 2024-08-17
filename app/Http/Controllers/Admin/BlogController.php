@@ -32,6 +32,11 @@ class BlogController extends Controller
             };
 
             $additionalColumns = [
+                'image' => function ($row) {
+                    return view('components.form.table_image', [
+                        'url' => $row->feature_image->getPath(),
+                    ])->render();
+                },
                 'phase' => function ($row) {
                     $status = $row->phase;
                     $class = '';
@@ -53,10 +58,10 @@ class BlogController extends Controller
                 },
             ];
 
-            return $this->getDataTable($request, $data, $additionalColumns, ['phase'], true, null, $actionButtons);
+            return $this->getDataTable($request, $data, $additionalColumns, ['image', 'phase'], true, null, $actionButtons);
         }
         return view('admin.blog.index', [
-            'columns' => ['title', 'publish_date', 'phase'],
+            'columns' => ['image', 'title', 'publish_date', 'phase'],
         ]);
     }
 
@@ -66,21 +71,29 @@ class BlogController extends Controller
         return view('admin.blog.create', ['location' => Location::acceptedAndActive()->pluck("title", "id")]);
     }
 
-
-    public function store(BlogRequest $request)
+    
+    public function store(BlogRequest $request): RedirectResponse
     {
-        $data = $request->all();
-        $data['user_id'] = auth()->user()->id;
-        Blog::create($data);
+        DB::beginTransaction();
+        $blog = $request->safe()->except('image', 'cover');
+        $blog = Blog::create($blog);
+        if ($request->hasFile('image')) {
+            $blog->storeFeatureImage($blog->title, $request->file('image'));
+        }
+
+        if ($request->hasFile('cover')) {
+            $blog->storeCoverImage($blog->title, $request->file('cover'));
+        }
+        DB::commit();
         return redirect()->route('admin.blogs.index')->with('success', 'Blog Created Successfully!');
     }
 
 
     public function show(Blog $blog): View
     {
-        $blog = Blog::with('user','location')->find($blog->id);
+        $blog = Blog::with('user', 'location')->find($blog->id);
         $location = $blog->location;
-        return view('admin.blog.show', compact('blog','location'));
+        return view('admin.blog.show', compact('blog', 'location'));
     }
 
 
@@ -92,7 +105,15 @@ class BlogController extends Controller
 
     public function update(BlogUpdateRequest $request, Blog $blog): RedirectResponse
     {
-        $blog->update($request->validated());
+        $blog->update($request->safe()->except('image', 'cover'));
+
+        if ($request->hasFile('image')) {
+            $blog->updateFeatureImage($blog->title, $request->file('image'));
+        }
+
+        if ($request->hasFile('cover')) {
+            $blog->updateCoverImage($blog->title, $request->file('cover'));
+        }
 
         return redirect()->route('admin.blogs.index')->with('success', 'Blog Updated Successfully!');
     }

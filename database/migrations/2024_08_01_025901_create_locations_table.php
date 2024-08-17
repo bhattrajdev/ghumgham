@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title', 100);
             $table->string('slug', 100);
             $table->string('latitude')->nullable();
+            $table->string('carousel_text')->nullable();
             $table->string('longitude')->nullable();
             $table->string('address')->nullable();
             $table->longText('description')->nullable();

@@ -10,4 +10,5 @@ enum ImageType: string
     case TYPE_DOCS = "doc";
     case TYPE_ICON = "icon";
     case TYPE_META = "meta";
+    
 }

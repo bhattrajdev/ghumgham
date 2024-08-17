@@ -26,11 +26,6 @@ class AdminAuthController extends Controller
             'password' => 'required',
         ]);
 
-        // code for getting Hash password thing
-        // $password = $request->input('password');
-        // $hashedPassword = Hash::make($password);
-        // dd($hashedPassword);
-
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $request->filled('remember'))) {
             return redirect()->route('admin.dashboard');
         } else {

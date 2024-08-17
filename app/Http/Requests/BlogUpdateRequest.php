@@ -30,6 +30,8 @@ class BlogUpdateRequest extends FormRequest
                 Rule::unique('blogs')->ignore($this->blog->id, 'id')
             ],            'title' => 'required|string|min:3',
             'description' => 'required|string|min:3',
+            'image' => 'nullable|image|mimes:png,jpg,jpeg,svg,gif,webp|max:2048',
+            'cover' => 'nullable|image|mimes:png,jpg,jpeg,svg,gif,webp|max:2048',
             'user_id' => 'nullable',
             'publish_date' => 'required|date',
             'phase' => 'nullable',

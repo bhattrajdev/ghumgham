@@ -3,28 +3,18 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Symfony\Component\HttpFoundation\Response;
-use App\Models\User;
 
 class AdminAuth
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function handle($request, Closure $next, $guard = null)
+    public function handle($request, Closure $next)
     {
-        //check if authenticate && second is condition when we need to redirect i.e, 
-        if (Auth::guard($guard)->check() && $request->route()->named('admin.login')) {
-            return redirect()->route('admin.dashbaord');
+        // Check if the user is authenticated and is an admin
+        if (Auth::check()) {
+            return $next($request);
         }
 
-        return $next($request);
+        // Redirect non-admins to login page or another route
+        return redirect()->route('admin.login');
     }
-    // User is not authenticated, continue to the requested page
 }

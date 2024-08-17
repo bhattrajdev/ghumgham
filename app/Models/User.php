@@ -49,9 +49,9 @@ class User extends Authenticatable
     const ROLE_ADMIN = 'admin';
 
     // Check if the user is an admin
-    public function isAdmin()
+    public function isAdmin(): bool
     {
-        return $this->role === self::ROLE_ADMIN;
+        return $this->is_admin;
     }
 
     // Check if the user is a regular user

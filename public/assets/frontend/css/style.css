@@ -1,0 +1,256 @@
+:root {
+    --primary-color: #095385;
+    --secondary-color: #e74c3c; 
+    --tertiary-color: #009e0b;
+    --nav-height :60px;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+.follow-us .social-icon a {
+    text-decoration: none;
+    color: inherit;
+    border: none;
+    outline: none;
+}
+
+.navbar {
+    background-color: var(--primary-color);
+    font-weight: 600;
+}
+
+.navbar-brand {
+    color: #ffffff !important;
+    /* Navbar text color */
+}
+
+.navbar-nav {
+    flex-direction: row;
+    margin: 0 auto;
+}
+
+.navbar-nav .nav-link {
+    color: #ffffff !important;
+    margin: 0 10px;
+    /* Space between nav links */
+}
+
+.navbar-nav .nav-link.active {
+    font-weight: bold;
+    border-bottom: 4px solid var(--tertiary-color);
+    border-radius: 4px;
+    /* Active link underline */
+}
+
+.navbar-toggler {
+    border-color: #ffffff;
+}
+
+.navbar-toggler-icon {
+    background-image: url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"%3E%3Cpath stroke="%23ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /%3E%3C/svg%3E');
+}
+
+.btn-login {
+    color: #ffffff;
+    background-color: var(--tertiary-color);
+    border: none;
+    border-radius: 5px;
+    padding: 8px 16px;
+    transition: background-color 0.3s;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.btn-login:hover {
+    background-color: #fff;
+    color: var(--tertiary-color);
+}
+
+.carousel-item {
+    height: calc(100vh - var(--nav-height));
+    /* Full viewport height */
+    background-size: cover;
+    background-position: center;
+}
+
+/* .carousel-caption {
+    bottom: 30%;
+} */
+
+.carousel-caption h1 {
+    font-size: 3rem;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.about-section img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.locations-section .card {
+    border: none;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.locations-section .card-img-top {
+    height: 250px;
+    /* Fixed height for consistency */
+    object-fit: cover;
+}
+
+.locations-section .card:hover {
+    transform: scale(1.05);
+    /* Slight zoom effect */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.blogs-section .card {
+    border: none;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.blogs-section .card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.footer {
+    background-color: var(--primary-color);
+    /* New footer color */
+    color: #ffffff;
+    padding: 20px;
+}
+
+.footer a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+.follow-us {
+    background-color: #f4f4f4;
+    padding: 40px 0;
+}
+
+.follow-us h2 {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.follow-us .social-icons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    font-size: 30px;
+    /* Increased space between icons */
+}
+
+.follow-us .social-icons a {
+    color: black
+}
+
+.follow-us .social-icon {
+    border-radius: 50%;
+    padding: 20px;
+    transition: background-color 0.3s, color 0.3s;
+    text-align: center;
+    width: 100px;
+    /* Larger size */
+    height: 100px;
+    /* Larger size */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.fab {
+    font-size: 30px !important;
+}
+
+.follow-us .social-icon a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.follow-us .social-icon.facebook:hover {
+    background-color: #3b5998;
+    color: white;
+
+}
+
+.follow-us .social-icon.twitter:hover {
+    background-color: #1da1f2;
+    color: white;
+}
+
+.follow-us .social-icon.instagram:hover {
+    background-color: #e1306c;
+    color: white;
+}
+
+.follow-us .social-icon.youtube:hover {
+    background-color: #ff0000;
+    color: white;
+}
+
+
+.follow-us .social-icon.linkedin:hover {
+    background-color: #0077b5;
+    color: white;
+}
+
+
+.follow-us .social-icon.facebook {
+    background-color: white;
+}
+
+.follow-us .social-icon.twitter {
+    background-color: white;
+
+}
+
+.follow-us .social-icon.instagram {
+    background-color: white;
+
+}
+
+.follow-us .social-icon.linkedin {
+    background-color: white;
+
+}
+
+.follow-us .social-icon.youtube {
+    /* background-color: #ff0000;  */
+    background-color: white;
+
+}
+
+.follow-us .social-icon i {
+    font-size: 5rem;
+}
+
+.subheading {
+    font-size:24px;
+    font-weight: 600;  /* Semi-bold text */
+    text-transform: capitalize; /* Makes the text uppercase */
+    letter-spacing: 0.05em; /* Adds space between letters */
+}
+

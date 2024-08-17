@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\FrontendController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/', function () {
-    return 'Welcome to frontend of ghumgham !! Work Under Progress';
-});
+
+Route::get('', [FrontendController::class, 'welcome'])->name('welcome');
+Route::get('location/{slug}', [FrontendController::class, 'getLocation'])->name('getLocation');
+Route::get('location/{slug}', [FrontendController::class, 'getBlog'])->name('getBlog');
+

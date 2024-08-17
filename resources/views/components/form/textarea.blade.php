@@ -11,7 +11,7 @@
 'name'
 ])
 
-<div class="col-md-{{$col}}">
+<div class=" mt-2 col-md-{{$col}} ">
     <label for="{{$id}}" class="col-form-label">{{$label}} @if($req === true)
         <span class="text-danger">*</span>
         @endif</label>

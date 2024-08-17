@@ -2,6 +2,9 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Support\Facades\Auth;
+
+
 use Illuminate\Foundation\Http\FormRequest;
 
 class LocationRequest extends FormRequest
@@ -24,6 +27,9 @@ class LocationRequest extends FormRequest
         return [
             'title' => 'required|string|min:3',
             'slug' => "required|string|unique:blogs,slug|regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/",
+            'image' => 'required|image|mimes:png,jpg,jpeg,svg,gif,webp|max:2048',
+            'cover' => 'required|image|mimes:png,jpg,jpeg,svg,gif,webp|max:2048',
+            'carousel_text' => 'required|string',
             'description' => 'required|string|min:3',
             'route' => 'required|string|min:3',
             'address' => 'required|string',
@@ -33,5 +39,12 @@ class LocationRequest extends FormRequest
             'phase' => 'nullable',
             'status' => 'boolean',
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'user_id' => Auth::id(),
+        ]);
     }
 }

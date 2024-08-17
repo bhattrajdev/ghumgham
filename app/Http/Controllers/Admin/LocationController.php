@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 use App\Enums\StatusEnum;
+use Illuminate\Support\Facades\DB;
 
 class LocationController extends Controller
 {
@@ -30,6 +31,11 @@ class LocationController extends Controller
             };
 
             $additionalColumns = [
+                'image' => function ($row) {
+                    return view('components.form.table_image', [
+                        'url' => $row->feature_image->getPath(),
+                    ])->render();
+                },
                 'phase' => function ($row) {
                     $status = $row->phase;
                     $class = '';
@@ -51,12 +57,13 @@ class LocationController extends Controller
                 },
             ];
 
-            return $this->getDataTable($request, $data, $additionalColumns, ['phase'], true, null, $actionButtons);
+            return $this->getDataTable($request, $data, $additionalColumns, ['image', 'phase'], true, null, $actionButtons);
         }
         return view('admin.location.index', [
-            'columns' => ['title', 'address', 'phase'],
+            'columns' => ['image', 'title', 'address', 'phase'],
         ]);
     }
+
     public function create()
     {
         return view('admin.location.create');
@@ -64,13 +71,19 @@ class LocationController extends Controller
 
     public function store(LocationRequest $request)
     {
-        $data = $request->validated();
-        $data['user_id'] = auth()->user()->id;
-        $data['phase'] = "accepted";
-        Location::create($data);
+        DB::beginTransaction();
+        $location = $request->safe()->except('image', 'cover');
+        $location = Location::create($location);
+        if ($request->hasFile('image')) {
+            $location->storeFeatureImage($location->title, $request->file('image'));
+        }
+
+        if ($request->hasFile('cover')) {
+            $location->storeCoverImage($location->title, $request->file('cover'));
+        }
+        DB::commit();
         return redirect()->route('admin.locations.index')->with('success', 'Location Created Successfully!');
     }
-
 
     public function show(Location $location): View
     {
@@ -78,18 +91,22 @@ class LocationController extends Controller
         return view('admin.location.show', compact('location'));
     }
 
-
     public function edit(Location $location)
     {
         return view('admin.location.edit', compact('location'));
     }
 
-
     public function update(LocationUpdateRequest $request, Location $location)
     {
-        
-        $location->update($request->validated());
-        return redirect()->route('admin.locations.index')->with('success', 'Location updated successfully');
+        $location->update($request->safe()->except('image', 'cover'));
+        if ($request->hasFile('image')) {
+            $location->updateFeatureImage($location->title, $request->file('image'));
+        }
+        if ($request->hasFile('cover')) {
+            $location->updateCoverImage($location->title, $request->file('cover'));
+        }
+
+        return redirect()->route('admin.locations.index')->with('success', 'Blog Updated Successfully!');
     }
 
     public function changeStatus(Request $request): void
